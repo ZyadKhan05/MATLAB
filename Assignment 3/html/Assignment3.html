@@ -1,0 +1,328 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Assignment3</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-04-03"><meta name="DC.source" content="Assignment3.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">% Zyad Khan</span>
+<span class="comment">% Matlab Unit 3 Assignment</span>
+<span class="comment">% MATH-210: Linear Algebra</span>
+
+<span class="comment">% Display name and assignment details</span>
+disp(<span class="string">'Zyad Khan - MATLAB Unit 3 Assignment'</span>)
+
+<span class="comment">% Part 1 - Provided Matrix</span>
+<span class="comment">% Using provided A matrix, decode the message: DVIZRTJQXVCWOGUJNKGSDEWMDDY</span>
+A = [2 5 3; 12 9 4; 17 22 8];
+
+encodedTextMessage = <span class="string">'DVIZRTJQXVCWOGUJNKGSDEWMDDY'</span>;
+encodedMessage = [3 25 9 21 14 9 6 4 3; 21 17 16 2 6 13 18 22 3; 8 19 23 22 20 10 3 12 24];
+
+P = round(det(A)*inv(A));
+a = round(det(A)); num = [1:26]; res = mod(a*num,26);
+b = find(abs(res-1)&lt;10^-10);
+
+key = mod(b*P,26);
+
+<span class="comment">% Find the key matrix from the example</span>
+disp(<span class="string">"The mod 26 inverse of the A matrix (or the key matrix) is: "</span>)
+disp(key)
+decodedMessage = key * encodedMessage;
+decodedMessage = mod(decodedMessage, 26);
+
+<span class="comment">% Print</span>
+fprintf(<span class="string">"\nThe encoded message in text is: %s\n"</span>, encodedTextMessage)
+disp(<span class="string">"The encoded message Matrix is: "</span>)
+disp(encodedMessage)
+
+fprintf(<span class="string">"\nThe decoded message matrix is: \n"</span>)
+disp(decodedMessage)
+fprintf(<span class="string">"Translation: Alan Turing Cracked Enigma Code \n"</span>)
+<span class="comment">% This message refers to the person who cracked the German Enigma Code</span>
+<span class="comment">% during WW2.</span>
+
+
+<span class="comment">% Part 2 - Encode your own message with your own A matrix (mod 26 w/ an inverse)</span>
+fprintf(<span class="string">"\nPart 2 - Encode your own message with your own A matrix\n"</span>)
+message = <span class="string">'Congrats. You solved the code'</span>;
+messageMatrix = [2 6 19 14 14 4 7 14; 14 17 18 20 11 3 4  3 ; 13 0 24 18 21 19 2 4];
+
+<span class="comment">% My A Matrix</span>
+A = [ 10 17 8 ; 3 22 4; 14 11 3];
+
+<span class="comment">% Find Key matrix for my A matrix</span>
+P = round(det(A)*inv(A));
+a = round(det(A)); num = [1:26]; res = mod(a*num,26);
+b = find(abs(res-1)&lt;10^-10);
+key = mod(b*P,26);
+
+encodedMessage = mod(A * messageMatrix, 26);
+decodedMessage = key * encodedMessage;
+decodedMessage = mod(decodedMessage, 26);
+
+<span class="comment">% Output</span>
+disp(<span class="string">"The mod 26 inverse of the A martrix (or the key matrix) is: "</span>)
+disp(key)
+
+disp(<span class="string">"The encoded message matrix is: "</span>);
+disp(encodedMessage)
+encodedMessageText = <span class="string">'ycnlclmdqaicbeqjyqynspuh'</span>;
+disp(<span class="string">"The encoded message matrix in text is:"</span> + encodedMessageText)
+
+disp(<span class="string">"The decoded message using this message is (which is the same as the message in matrix form): "</span>);
+disp(decodedMessage)
+disp(<span class="string">"Translation: Congrats you solved the code"</span>)
+
+<span class="comment">% Part 3 - In Class Decoding from Gavin Dalton</span>
+
+fprintf(<span class="string">"\nPart 3 - In Class Decoding from Gavin Dalton"</span>)
+<span class="comment">% Using the classmate's A matrix, decode the message:</span>
+A = [23 8 1 ; 15 1 7; 12 17 7];
+
+encodedTextMessage = <span class="string">'DILNMNIROEOCDMRCAQVPUZKBFWM'</span>;
+encodedMessage = [3 13 8 4 3 2 21 25 5; 8 11 17 14 12 0 15 10 22; 11 13 14 2 17 16 20 1 12];
+
+P = round(det(A)*inv(A));
+a = round(det(A)); num = [1:26]; res = mod(a*num,26);
+b = find(abs(res-1)&lt;10^-10);
+
+key = mod(b*P,26);
+
+<span class="comment">% Find the key matrix from a classmate</span>
+fprintf(<span class="string">"The mod 26 inverse of the A matrix (or the key matrix) from a classmate is: "</span>)
+disp(key)
+decodedMessage = key * encodedMessage;
+decodedMessage = mod(decodedMessage, 26);
+
+<span class="comment">% Print results</span>
+fprintf(<span class="string">"\nThe encoded message from a classmate in text is: %s\n"</span>, encodedTextMessage)
+disp(<span class="string">"The encoded message Matrix from a classmate is: "</span>)
+disp(encodedMessage)
+
+fprintf(<span class="string">"\nThe decoded message matrix from a classmate is: \n"</span>)
+disp(decodedMessage)
+fprintf(<span class="string">"The decoded message in text from a classmate is: The Night(njght) Hawk Flies at Midnight\n"</span>)
+</pre><pre class="codeoutput">Zyad Khan - MATLAB Unit 3 Assignment
+The mod 26 inverse of the A matrix (or the key matrix) is: 
+     2     0     9
+    10    19    16
+    17     3     2
+
+
+The encoded message in text is: DVIZRTJQXVCWOGUJNKGSDEWMDDY
+The encoded message Matrix is: 
+     3    25     9    21    14     9     6     4     3
+    21    17    16     2     6    13    18    22     3
+     8    19    23    22    20    10     3    12    24
+
+
+The decoded message matrix is: 
+     0    13    17     6     0     4    13    12    14
+    11    19     8     2     2     3     8     0     3
+     0    20    13    17    10     4     6     2     4
+
+Translation: Alan Turing Cracked Enigma Code 
+
+Part 2 - Encode your own message with your own A matrix
+The mod 26 inverse of the A martrix (or the key matrix) is: 
+    24    25    24
+    17    24    18
+    25    12    13
+
+The encoded message matrix is: 
+    24    11    12     0     1     9    24    15
+     2     2     3     8     4    24    13    20
+    13    11    16     2    16    16    18     7
+
+The encoded message matrix in text is:ycnlclmdqaicbeqjyqynspuh
+The decoded message using this message is (which is the same as the message in matrix form): 
+     2     6    19    14    14     4     7    14
+    14    17    18    20    11     3     4     3
+    13     0    24    18    21    19     2     4
+
+Translation: Congrats you solved the code
+
+Part 3 - In Class Decoding from Gavin DaltonThe mod 26 inverse of the A matrix (or the key matrix) from a classmate is:     12    13    15
+    25    17    24
+    19     7     9
+
+
+The encoded message from a classmate in text is: DILNMNIROEOCDMRCAQVPUZKBFWM
+The encoded message Matrix from a classmate is: 
+     3    13     8     4     3     2    21    25     5
+     8    11    17    14    12     0    15    10    22
+    11    13    14     2    17    16    20     1    12
+
+
+The decoded message matrix from a classmate is: 
+    19     0     7     0     5     4    19     3     6
+     7    18    19    22    11    18    12    13     7
+     4    25     7    10     8     0     8     8    19
+
+The decoded message in text from a classmate is: The Night(njght) Hawk Flies at Midnight
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+% Zyad Khan
+% Matlab Unit 3 Assignment
+% MATH-210: Linear Algebra
+
+% Display name and assignment details
+disp('Zyad Khan - MATLAB Unit 3 Assignment')
+
+% Part 1 - Provided Matrix
+% Using provided A matrix, decode the message: DVIZRTJQXVCWOGUJNKGSDEWMDDY
+A = [2 5 3; 12 9 4; 17 22 8];
+
+encodedTextMessage = 'DVIZRTJQXVCWOGUJNKGSDEWMDDY';
+encodedMessage = [3 25 9 21 14 9 6 4 3; 21 17 16 2 6 13 18 22 3; 8 19 23 22 20 10 3 12 24];
+
+P = round(det(A)*inv(A));
+a = round(det(A)); num = [1:26]; res = mod(a*num,26);
+b = find(abs(res-1)<10^-10);
+
+key = mod(b*P,26);
+
+% Find the key matrix from the example
+disp("The mod 26 inverse of the A matrix (or the key matrix) is: ")
+disp(key)
+decodedMessage = key * encodedMessage;
+decodedMessage = mod(decodedMessage, 26);
+
+% Print 
+fprintf("\nThe encoded message in text is: %s\n", encodedTextMessage)
+disp("The encoded message Matrix is: ")
+disp(encodedMessage)
+
+fprintf("\nThe decoded message matrix is: \n")
+disp(decodedMessage)
+fprintf("Translation: Alan Turing Cracked Enigma Code \n")
+% This message refers to the person who cracked the German Enigma Code
+% during WW2.
+
+
+% Part 2 - Encode your own message with your own A matrix (mod 26 w/ an inverse)
+fprintf("\nPart 2 - Encode your own message with your own A matrix\n")
+message = 'Congrats. You solved the code';
+messageMatrix = [2 6 19 14 14 4 7 14; 14 17 18 20 11 3 4  3 ; 13 0 24 18 21 19 2 4];
+
+% My A Matrix 
+A = [ 10 17 8 ; 3 22 4; 14 11 3];
+
+% Find Key matrix for my A matrix
+P = round(det(A)*inv(A));
+a = round(det(A)); num = [1:26]; res = mod(a*num,26);
+b = find(abs(res-1)<10^-10);
+key = mod(b*P,26);
+
+encodedMessage = mod(A * messageMatrix, 26);
+decodedMessage = key * encodedMessage;
+decodedMessage = mod(decodedMessage, 26);
+
+% Output
+disp("The mod 26 inverse of the A martrix (or the key matrix) is: ")
+disp(key)
+
+disp("The encoded message matrix is: ");
+disp(encodedMessage)
+encodedMessageText = 'ycnlclmdqaicbeqjyqynspuh';
+disp("The encoded message matrix in text is:" + encodedMessageText)
+
+disp("The decoded message using this message is (which is the same as the message in matrix form): ");
+disp(decodedMessage)
+disp("Translation: Congrats you solved the code")
+
+% Part 3 - In Class Decoding from Gavin Dalton
+
+fprintf("\nPart 3 - In Class Decoding from Gavin Dalton")
+% Using the classmate's A matrix, decode the message: 
+A = [23 8 1 ; 15 1 7; 12 17 7];
+
+encodedTextMessage = 'DILNMNIROEOCDMRCAQVPUZKBFWM';
+encodedMessage = [3 13 8 4 3 2 21 25 5; 8 11 17 14 12 0 15 10 22; 11 13 14 2 17 16 20 1 12];
+
+P = round(det(A)*inv(A));
+a = round(det(A)); num = [1:26]; res = mod(a*num,26);
+b = find(abs(res-1)<10^-10);
+
+key = mod(b*P,26);
+
+% Find the key matrix from a classmate
+fprintf("The mod 26 inverse of the A matrix (or the key matrix) from a classmate is: ")
+disp(key)
+decodedMessage = key * encodedMessage;
+decodedMessage = mod(decodedMessage, 26);
+
+% Print results
+fprintf("\nThe encoded message from a classmate in text is: %s\n", encodedTextMessage)
+disp("The encoded message Matrix from a classmate is: ")
+disp(encodedMessage)
+
+fprintf("\nThe decoded message matrix from a classmate is: \n")
+disp(decodedMessage)
+fprintf("The decoded message in text from a classmate is: The Night(njght) Hawk Flies at Midnight\n")
+
+##### SOURCE END #####
+--></body></html>
